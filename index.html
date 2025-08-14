@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Fluxo n8n</title>
+    <style>
+        /* CSS Básico para melhor visualização */
+        body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2 { color: #555; }
+        .node { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #fafafa; }
+        .node-title { font-size: 1.2em; font-weight: bold; color: #0056b3; }
+        .node-details { font-family: monospace; font-size: 0.9em; color: #666; }
+        .prompt { background-color: #2d2d2d; color: #f2f2f2; padding: 15px; border-radius: 5px; white-space: pre-wrap; /* Mantém a formatação do texto */ font-family: 'Courier New', Courier, monospace; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="workflow-name">Carregando nome do fluxo...</h1>
+        <p>Abaixo estão os detalhes dos nós extraídos do arquivo JSON.</p>
+
+        <div id="nodes-container">
+            <p>Carregando nós...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

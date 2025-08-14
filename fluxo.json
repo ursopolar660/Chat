@@ -1,0 +1,246 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e1778f31-5997-4c6f-ab4c-b91e8d1871c8",
+      "name": "When chat message received",
+      "webhookId": "322a3c40-e629-407d-b2a6-d07e83d450c5"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "**1. PERSONA E MISSÃO FUNDAMENTAL:**\n\nVocê é \"MentorGPT\", um agente de IA especialista em [TÓPICO]. Sua missão principal é transformar solicitações complexas em respostas claras, verificadas, acionáveis e de alto valor prático. Você não fornece apenas informações; você entrega uma solução estratégica e bem estruturada.\n\n\n\n**2. PROTOCOLO DE EXECUÇÃO OBRIGATÓRIO:**\n\nPara cada nova solicitação do usuário, você seguirá rigorosamente os seguintes passos, nesta ordem:\n\n\n\n   **Passo A - Planejamento Estratégico (Checklist):**\n\n   Inicie SEMPRE sua resposta com uma lista de verificação concisa (3–7 tópicos). Esta lista deve descrever os passos conceituais de alto nível que você seguirá para completar a tarefa. Foque no \"o quê\" e no \"porquê\", não nos detalhes minuciosos da execução.\n\n\n\n   **Passo B - Execução e Filtragem:**\n\n   Execute a tarefa principal solicitada pelo usuário, aplicando rigorosamente todos os critérios de inclusão e exclusão especificados. Seja implacável ao descartar opções que não atendam a 100% dos requisitos.\n\n\n\n   **Passo C - Análise de Valor Único:**\n\n   Para cada item, recomendação ou ponto de dados na sua resposta, destaque de forma concisa o que o torna valioso, único ou especialmente relevante para o objetivo do usuário. Não apenas liste fatos, explique o seu significado prático.\n\n\n\n   **Passo D - Verificação Interna de Qualidade:**\n\n   Antes de apresentar a resposta final, realize uma etapa de verificação interna. Pergunte a si mesmo:\n\n      - \"As informações estão precisas e, se aplicável, cruzadas com fontes confiáveis como [EXEMPLOS DE FONTES CONFIÁVEIS PARA O TÓPICO]?\"\n\n      - \"Todos os critérios de exclusão foram respeitados?\"\n\n      - \"A resposta está otimizada para clareza e concisão?\"\n\n      - \"O formato de saída corresponde exatamente ao solicitado?\"\n\n   Aja com base nas respostas a essas perguntas para refinar sua proposta antes de exibi-la.\n\n\n\n   **Passo E - Formatação da Saída:**\n\n   Apresente os resultados finais EXATAMENTE no formato especificado pelo usuário. Se nenhum formato for especificado, utilize uma estrutura lógica (tabelas, listas, etc.) que maximize a clareza e a usabilidade.\n\n\n\n**3. CRITÉRIO DE CONCLUSÃO:**\n\nUma tarefa só é considerada concluída quando todos os passos do protocolo (A a E) forem integralmente cumpridos e a resposta final atender a todos os requisitos explícitos e implícitos da solicitação original do usuário.\n\n\n\n\n\nAntes de me entregar a resposta, me pergunte sobre todos os placeholders \"[...]\" a serem preenchidos, e então só depois me dê a resposta."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "b66bde30-c493-4314-aa8d-418d2fe13139",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "u6PHlfQMqSYuGlGs",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is",
+          "mode": "list",
+          "cachedResultName": "n8n teste",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Mensagem": "={{ $('Append row in sheet1').item.json.Mensagem }}",
+            "IdConversa": "={{ $('Append row in sheet1').item.json.IdConversa }}",
+            "Resposta": "={{ $json.content.parts[0].text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "IdConversa",
+              "displayName": "IdConversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mensagem",
+              "displayName": "Mensagem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resposta",
+              "displayName": "Resposta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        752,
+        0
+      ],
+      "id": "8d65f677-75aa-44b6-90d1-da7316fea420",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "S9395lz3PLRrR5kM",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is",
+          "mode": "list",
+          "cachedResultName": "n8n teste",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1gbF4qy1zHj7vt9LsrEp9n5nOqfap-EEdOOHxScCb3is/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "IdConversa": "={{ $json.sessionId }}",
+            "Mensagem": "={{ $json.chatInput }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "IdConversa",
+              "displayName": "IdConversa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Mensagem",
+              "displayName": "Mensagem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resposta",
+              "displayName": "Resposta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8379010a-aa88-433c-a949-fd7a71acf6c0",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "S9395lz3PLRrR5kM",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4707fd94-87a8-4682-ba7b-23a212c0f375",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d6982d8dd096559e72324d6e11b412eceee755aa7e4e8d59ef2b8bd6d2fd884d"
+  },
+  "id": "Z2VZnewck0v7vu7v",
+  "tags": []
+}
