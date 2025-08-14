@@ -86,7 +86,44 @@
             letter-spacing: 1px;
             text-shadow: 0 0 5px var(--accent-glow);
         }
-        
+        .new-chat-btn {
+            /* Aparência e Fundo */
+            background: transparent; /* Fundo transparente para se mesclar ao header */
+            border: 1px solid var(--border-color); /* Borda sutil com a cor do tema */
+            color: var(--font-color-secondary); /* Cor do ícone SVG */
+            
+            /* Formato e Tamanho */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Deixa o botão perfeitamente redondo */
+
+            /* Alinhamento do Ícone Interno */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* Interação e Animação */
+            cursor: pointer; /* Muda o cursor para uma "mãozinha" */
+            transition: all 0.3s ease; /* Animação suave para todas as transições (cor, rotação) */
+        }
+
+        /* 3. EFEITO DE INTERAÇÃO (AO PASSAR O MOUSE) 
+        */
+        .new-chat-btn:hover {
+            /* Muda a cor da borda e do ícone para a cor de destaque */
+            border-color: var(--accent-glow);
+            color: var(--accent-glow);
+            
+            /* Efeito futurista de rotação */
+            transform: rotate(90deg);
+        }
+
+        /* 4. ESTILO DO ÍCONE SVG DENTRO DO BOTÃO 
+        */
+        .new-chat-btn svg {
+            width: 20px;
+            height: 20px;
+        }
         .chat-window {
             flex-grow: 1;
             padding: 1rem 1.5rem;
@@ -248,8 +285,15 @@
 
     <div class="chat-container">
         <header class="chat-header">
-            <h2 id="ai-name">Carregando Interface...</h2>
-        </header>
+    <h2 id="ai-name">Carregando Interface...</h2>
+    
+    <button class="new-chat-btn" id="new-chat-button" aria-label="Iniciar nova conversa">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+            <path d="M12 4V8M12 16V20M8 12H4M20 12H16M6.34299 6.34299L9.17199 9.17199M14.828 14.828L17.657 17.657M6.34299 17.657L9.17199 14.828M14.828 9.17199L17.657 6.34299" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    
+</header>
         <main id="chat-window" class="chat-window"></main>
         <form id="chat-form" class="chat-input-form">
             <textarea id="message-input" class="chat-input" placeholder="Iniciar interação..." rows="1"></textarea>
