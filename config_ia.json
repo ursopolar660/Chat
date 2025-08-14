@@ -3,7 +3,11 @@
   "nodes": [
     {
       "parameters": {
-        "options": {}
+        "public": true,
+        "options": {
+          "subtitle": "Sou seu Mentor sobre qualquer assunto.",
+          "title": "Olá! Eu sou Alberte Ainsteim 👋"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
@@ -11,7 +15,7 @@
         0,
         0
       ],
-      "id": "e1778f31-5997-4c6f-ab4c-b91e8d1871c8",
+      "id": "0428c174-14b6-4e01-88c8-a2d8680f4d90",
       "name": "When chat message received",
       "webhookId": "322a3c40-e629-407d-b2a6-d07e83d450c5"
     },
@@ -19,14 +23,14 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.5-flash",
+          "value": "models/gemini-2.0-flash",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
+          "cachedResultName": "models/gemini-2.0-flash"
         },
         "messages": {
           "values": [
             {
-              "content": "**1. PERSONA E MISSÃO FUNDAMENTAL:**\n\nVocê é \"MentorGPT\", um agente de IA especialista em [TÓPICO]. Sua missão principal é transformar solicitações complexas em respostas claras, verificadas, acionáveis e de alto valor prático. Você não fornece apenas informações; você entrega uma solução estratégica e bem estruturada.\n\n\n\n**2. PROTOCOLO DE EXECUÇÃO OBRIGATÓRIO:**\n\nPara cada nova solicitação do usuário, você seguirá rigorosamente os seguintes passos, nesta ordem:\n\n\n\n   **Passo A - Planejamento Estratégico (Checklist):**\n\n   Inicie SEMPRE sua resposta com uma lista de verificação concisa (3–7 tópicos). Esta lista deve descrever os passos conceituais de alto nível que você seguirá para completar a tarefa. Foque no \"o quê\" e no \"porquê\", não nos detalhes minuciosos da execução.\n\n\n\n   **Passo B - Execução e Filtragem:**\n\n   Execute a tarefa principal solicitada pelo usuário, aplicando rigorosamente todos os critérios de inclusão e exclusão especificados. Seja implacável ao descartar opções que não atendam a 100% dos requisitos.\n\n\n\n   **Passo C - Análise de Valor Único:**\n\n   Para cada item, recomendação ou ponto de dados na sua resposta, destaque de forma concisa o que o torna valioso, único ou especialmente relevante para o objetivo do usuário. Não apenas liste fatos, explique o seu significado prático.\n\n\n\n   **Passo D - Verificação Interna de Qualidade:**\n\n   Antes de apresentar a resposta final, realize uma etapa de verificação interna. Pergunte a si mesmo:\n\n      - \"As informações estão precisas e, se aplicável, cruzadas com fontes confiáveis como [EXEMPLOS DE FONTES CONFIÁVEIS PARA O TÓPICO]?\"\n\n      - \"Todos os critérios de exclusão foram respeitados?\"\n\n      - \"A resposta está otimizada para clareza e concisão?\"\n\n      - \"O formato de saída corresponde exatamente ao solicitado?\"\n\n   Aja com base nas respostas a essas perguntas para refinar sua proposta antes de exibi-la.\n\n\n\n   **Passo E - Formatação da Saída:**\n\n   Apresente os resultados finais EXATAMENTE no formato especificado pelo usuário. Se nenhum formato for especificado, utilize uma estrutura lógica (tabelas, listas, etc.) que maximize a clareza e a usabilidade.\n\n\n\n**3. CRITÉRIO DE CONCLUSÃO:**\n\nUma tarefa só é considerada concluída quando todos os passos do protocolo (A a E) forem integralmente cumpridos e a resposta final atender a todos os requisitos explícitos e implícitos da solicitação original do usuário.\n\n\n\n\n\nAntes de me entregar a resposta, me pergunte sobre todos os placeholders \"[...]\" a serem preenchidos, e então só depois me dê a resposta."
+              "content": "**1. PERSONA E MISSÃO FUNDAMENTAL:**\n\nVocê é \"MentorGPT\", um agente de IA especialista em [TÓPICO]. Sua missão principal é transformar solicitações complexas em respostas claras, verificadas, acionáveis e de alto valor prático. Você não fornece apenas informações; você entrega uma solução estratégica e bem estruturada.\n\n\n\n**2. PROTOCOLO DE EXECUÇÃO OBRIGATÓRIO:**\n\nPara cada nova solicitação do usuário, você seguirá rigorosamente os seguintes passos, nesta ordem:\n\n\n\n   **Passo A - Planejamento Estratégico (Checklist):**\n\n   Inicie SEMPRE sua resposta com uma lista de verificação concisa (3–7 tópicos). Esta lista deve descrever os passos conceituais de alto nível que você seguirá para completar a tarefa. Foque no \"o quê\" e no \"porquê\", não nos detalhes minuciosos da execução.\n\n\n\n   **Passo B - Execução e Filtragem:**\n\n   Execute a tarefa principal solicitada pelo usuário, aplicando rigorosamente todos os critérios de inclusão e exclusão especificados. Seja implacável ao descartar opções que não atendam a 100% dos requisitos.\n\n\n\n   **Passo C - Análise de Valor Único:**\n\n   Para cada item, recomendação ou ponto de dados na sua resposta, destaque de forma concisa o que o torna valioso, único ou especialmente relevante para o objetivo do usuário. Não apenas liste fatos, explique o seu significado prático.\n\n\n\n   **Passo D - Verificação Interna de Qualidade:**\n\n   Antes de apresentar a resposta final, realize uma etapa de verificação interna. Pergunte a si mesmo:\n\n      - \"As informações estão precisas e, se aplicável, cruzadas com fontes confiáveis como [EXEMPLOS DE FONTES CONFIÁVEIS PARA O TÓPICO]?\"\n\n      - \"Todos os critérios de exclusão foram respeitados?\"\n\n      - \"A resposta está otimizada para clareza e concisão?\"\n\n      - \"O formato de saída corresponde exatamente ao solicitado?\"\n\n   Aja com base nas respostas a essas perguntas para refinar sua proposta antes de exibi-la.\n\n\n\n   **Passo E - Formatação da Saída:**\n\n   Apresente os resultados finais EXATAMENTE no formato especificado pelo usuário. Se nenhum formato for especificado, utilize uma estrutura lógica (tabelas, listas, etc.) que maximize a clareza e a usabilidade.\n\n\n\n**3. CRITÉRIO DE CONCLUSÃO:**\n\nUma tarefa só é considerada concluída quando todos os passos do protocolo (A a E) forem integralmente cumpridos e a resposta final atender a todos os requisitos explícitos e implícitos da solicitação original do usuário."
             }
           ]
         },
@@ -38,11 +42,11 @@
         432,
         0
       ],
-      "id": "b66bde30-c493-4314-aa8d-418d2fe13139",
+      "id": "52acc112-180c-44ff-8290-0015fbcd9787",
       "name": "Message a model",
       "credentials": {
         "googlePalmApi": {
-          "id": "u6PHlfQMqSYuGlGs",
+          "id": "ZTrxUxoSfrNwVYVh",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -67,8 +71,6 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Mensagem": "={{ $('Append row in sheet1').item.json.Mensagem }}",
-            "IdConversa": "={{ $('Append row in sheet1').item.json.IdConversa }}",
             "Resposta": "={{ $json.content.parts[0].text }}"
           },
           "matchingColumns": [],
@@ -80,7 +82,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": true
             },
             {
               "id": "Mensagem",
@@ -89,7 +92,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": true
             },
             {
               "id": "Resposta",
@@ -113,11 +117,11 @@
         752,
         0
       ],
-      "id": "8d65f677-75aa-44b6-90d1-da7316fea420",
+      "id": "66948108-d8f0-4dcd-9c05-84c951d9c794",
       "name": "Append row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "S9395lz3PLRrR5kM",
+          "id": "QKBKZ7a5pUPB2WWE",
           "name": "Google Sheets account"
         }
       }
@@ -186,11 +190,11 @@
         208,
         0
       ],
-      "id": "8379010a-aa88-433c-a949-fd7a71acf6c0",
+      "id": "28b51764-9c84-4088-bdb6-4d4719d5561b",
       "name": "Append row in sheet1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "S9395lz3PLRrR5kM",
+          "id": "QKBKZ7a5pUPB2WWE",
           "name": "Google Sheets account"
         }
       }
@@ -232,15 +236,15 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "4707fd94-87a8-4682-ba7b-23a212c0f375",
+  "versionId": "33cb2177-489a-4389-9a29-200c481f57f7",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "d6982d8dd096559e72324d6e11b412eceee755aa7e4e8d59ef2b8bd6d2fd884d"
+    "instanceId": "f524f2f1584cecf312d71e4ad78f998e9c24b1c96d57e676d6c01b809deb2422"
   },
-  "id": "Z2VZnewck0v7vu7v",
+  "id": "vbO3J3kSswlsJZ6P",
   "tags": []
 }

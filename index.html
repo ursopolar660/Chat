@@ -3,30 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador de Fluxo n8n</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>MentorGPT | Interface Neural</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS Básico para melhor visualização */
-        body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f4f4; }
-        .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1, h2 { color: #555; }
-        .node { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 5px; background-color: #fafafa; }
-        .node-title { font-size: 1.2em; font-weight: bold; color: #0056b3; }
-        .node-details { font-family: monospace; font-size: 0.9em; color: #666; }
-        .prompt { background-color: #2d2d2d; color: #f2f2f2; padding: 15px; border-radius: 5px; white-space: pre-wrap; /* Mantém a formatação do texto */ font-family: 'Courier New', Courier, monospace; }
+        /* 1. RESET E VARIÁVEIS DE TEMA (RAIZ DO DESIGN FUTURISTA) */
+        :root {
+            --bg-gradient-start: #12141d;
+            --bg-gradient-end: #0d0d1a;
+            --container-bg: rgba(26, 28, 41, 0.6);
+            --glass-blur: 10px;
+            --border-color: rgba(128, 128, 255, 0.2);
+            --font-color-primary: #e1e1e6;
+            --font-color-secondary: #a8a8b3;
+            --user-msg-bg: linear-gradient(135deg, #3a36e4, #008cff);
+            --ai-msg-bg: #2a2c3a;
+            --accent-glow: #00aaff;
+            --font-family: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 2. ESTILO DO CORPO (BACKGROUND ANIMADO) */
+        body {
+            font-family: var(--font-family);
+            color: var(--font-color-primary);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            
+            /* Efeito de gradiente animado para um toque futurista */
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end), #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 3. CONTAINER DO CHAT (EFEITO DE VIDRO - GLASSMORPHISM) */
+        .chat-container {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            border-radius: 16px;
+            
+            /* Efeito Glassmorphism */
+            background: var(--container-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            
+            transition: all 0.3s ease;
+        }
+
+        /* 4. CABEÇALHO E JANELA DE MENSAGENS */
+        .chat-header {
+            padding: 1.25rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #ai-name {
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--accent-glow);
+        }
+        
+        .chat-window {
+            flex-grow: 1;
+            padding: 1rem 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Estilização da barra de rolagem para combinar com o tema */
+        .chat-window::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-window::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-window::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 10px;
+            border: 3px solid transparent;
+        }
+
+        /* 5. ESTILO DAS MENSAGENS (COM ANIMAÇÃO DE ENTRADA) */
+        .message {
+            max-width: 80%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            line-height: 1.5;
+            animation: messageFadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--user-msg-bg);
+            color: #fff;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: var(--ai-msg-bg);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 5px;
+        }
+        
+        /* Estilização do conteúdo gerado pelo 'marked.js' dentro das msgs da IA */
+        .ai-message p:not(:last-child) {
+            margin-bottom: 1em;
+        }
+        .ai-message ul, .ai-message ol {
+            padding-left: 1.5rem;
+        }
+        .ai-message code {
+            background-color: rgba(0,0,0,0.3);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .ai-message pre {
+             background-color: rgba(0,0,0,0.3);
+             padding: 1rem;
+             border-radius: 8px;
+             overflow-x: auto;
+        }
+        
+        .typing-indicator {
+            color: var(--font-color-secondary);
+            font-style: italic;
+        }
+
+        /* 6. FORMULÁRIO DE INPUT (COM EFEITO DE FOCO) */
+        .chat-input-form {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            background: var(--ai-msg-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            padding: 0.75rem 1.25rem;
+            font-size: 1rem;
+            color: var(--font-color-primary);
+            transition: all 0.3s ease;
+            
+            /* === PROPRIEDADES NOVAS/AJUSTADAS === */
+            font-family: var(--font-family); /* Garante que a fonte seja a mesma */
+            resize: none;                   /* Impede que o usuário redimensione manualmente */
+            line-height: 1.5;               /* Melhora o espaçamento entre linhas */
+            max-height: 150px;              /* Limite para o crescimento automático */
+            overflow-y: auto;               /* Adiciona scroll se passar do limite */
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 10px 2px rgba(0, 170, 255, 0.5);
+        }
+        
+        .chat-input::placeholder {
+            color: var(--font-color-secondary);
+        }
+
+        .send-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--user-msg-bg);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-button:hover, .send-button:focus {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .send-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* 7. DESIGN RESPONSIVO PARA MOBILE */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            .chat-container {
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+            .chat-window {
+                padding: 1rem;
+            }
+            .message {
+                max-width: 85%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 id="workflow-name">Carregando nome do fluxo...</h1>
-        <p>Abaixo estão os detalhes dos nós extraídos do arquivo JSON.</p>
-
-        <div id="nodes-container">
-            <p>Carregando nós...</p>
-        </div>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h2 id="ai-name">Carregando Interface...</h2>
+        </header>
+        <main id="chat-window" class="chat-window"></main>
+        <form id="chat-form" class="chat-input-form">
+            <textarea id="message-input" class="chat-input" placeholder="Iniciar interação..." rows="1"></textarea>
+            <button type="submit" class="send-button" aria-label="Enviar mensagem">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
+                </svg>
+            </button>
+        </form>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
