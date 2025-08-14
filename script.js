@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para iniciar ou reiniciar um chat
     function startNewChat() {
         chatWindow.innerHTML = '';
-        addMessageToChat('Olá! Sou seu MentorGPT. Qual o seu desafio hoje?', 'ai');
+        addMessageToChat('Olá! Sou seu Albert Aisnteim. Para iniciar um novo chat, é só tocar no botão acima. Qual o seu desafio hoje?', 'ai');
         messageInput.focus();
         resetTextareaHeight();
     }
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     aiConfig.persona = nameMatch[1];
                 }
             }
-            aiNameEl.textContent = `Conversando com ${aiConfig.persona}`;
+            aiNameEl.textContent = "Conversando com Albert Aisnteim";
             startNewChat(); // Inicia o primeiro chat
         })
         .catch(error => {
