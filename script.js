@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function getAiResponse(userInput) {
         const typingIndicator = document.createElement('div');
-        typingIndicator.textContent = `${aiConfig.persona} está digitando...`;
+        typingIndicator.textContent = "Albert está digitando...";
         typingIndicator.classList.add('message', 'ai-message', 'typing-indicator');
         chatWindow.appendChild(typingIndicator);
         chatWindow.scrollTop = chatWindow.scrollHeight;

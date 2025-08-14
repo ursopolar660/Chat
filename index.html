@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <title>Albert Ainsteim | Mentor</title>
+    <title>Albert Einstein | Mentor</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. RESET E VARIÁVEIS DE TEMA (RAIZ DO DESIGN FUTURISTA) */
         :root {
             --bg-gradient-start: #12141d;
             --bg-gradient-end: #0d0d1a;
@@ -32,21 +31,23 @@
             box-sizing: border-box;
         }
 
-        /* 2. ESTILO DO CORPO (BACKGROUND ANIMADO) */
+        /* --- MUDANÇA PRINCIPAL PARA O LAYOUT STICKY FOOTER --- */
         body {
             font-family: var(--font-family);
             color: var(--font-color-primary);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
             
-            /* Efeito de gradiente animado para um toque futurista */
+            /* 1. Define o corpo como um container flexível em coluna */
+            display: flex;
+            flex-direction: column;
+            /* 2. Garante que o corpo ocupe no mínimo 100% da altura da tela */
+            min-height: 100vh; 
+            
+            /* O background animado continua o mesmo */
             background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end), #1a1a2e);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
+        /* --- FIM DA MUDANÇA PRINCIPAL --- */
 
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
@@ -54,230 +55,87 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 3. CONTAINER DO CHAT (EFEITO DE VIDRO - GLASSMORPHISM) */
         .chat-container {
-            width: 100%;
-            height: 100%;
-            max-width: 800px;
-            max-height: 90vh;
+             /* --- MUDANÇA SUTIL NO CONTAINER --- */
+            flex-grow: 1; /* 3. Faz o container do chat crescer para ocupar todo o espaço disponível, empurrando o footer para baixo */
             display: flex;
             flex-direction: column;
-            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem auto 0; /* Adiciona margem no topo e centraliza */
             
-            /* Efeito Glassmorphism */
+            /* O resto do estilo do container permanece o mesmo */
+            max-height: 90vh;
+            border-radius: 16px;
             background: var(--container-bg);
             backdrop-filter: blur(var(--glass-blur));
             -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            
             transition: all 0.3s ease;
         }
 
-        /* 4. CABEÇALHO E JANELA DE MENSAGENS */
+        /* O resto do seu CSS continua aqui... */
         .chat-header {
             padding: 1.25rem;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0; /* Impede que o header encolha */
         }
 
-        #ai-name {
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px var(--accent-glow);
-        }
-        .new-chat-btn {
-            /* Aparência e Fundo */
-            background: transparent; /* Fundo transparente para se mesclar ao header */
-            border: 1px solid var(--border-color); /* Borda sutil com a cor do tema */
-            color: var(--font-color-secondary); /* Cor do ícone SVG */
-            
-            /* Formato e Tamanho */
-            width: 40px;
-            height: 40px;
-            border-radius: 50%; /* Deixa o botão perfeitamente redondo */
-
-            /* Alinhamento do Ícone Interno */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            /* Interação e Animação */
-            cursor: pointer; /* Muda o cursor para uma "mãozinha" */
-            transition: all 0.3s ease; /* Animação suave para todas as transições (cor, rotação) */
-        }
-
-        /* 3. EFEITO DE INTERAÇÃO (AO PASSAR O MOUSE) 
-        */
-        .new-chat-btn:hover {
-            /* Muda a cor da borda e do ícone para a cor de destaque */
-            border-color: var(--accent-glow);
-            color: var(--accent-glow);
-            
-            /* Efeito futurista de rotação */
-            transform: rotate(90deg);
-        }
-
-        /* 4. ESTILO DO ÍCONE SVG DENTRO DO BOTÃO 
-        */
-        .new-chat-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-        .chat-window {
-            flex-grow: 1;
-            padding: 1rem 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        #ai-name { font-weight: 600; letter-spacing: 1px; text-shadow: 0 0 5px var(--accent-glow); }
+        .new-chat-btn { background: transparent; border: 1px solid var(--border-color); color: var(--font-color-secondary); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s ease; }
+        .new-chat-btn:hover { border-color: var(--accent-glow); color: var(--accent-glow); transform: rotate(90deg); }
+        .new-chat-btn svg { width: 20px; height: 20px; }
+        .chat-window { flex-grow: 1; padding: 1rem 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+        .chat-window::-webkit-scrollbar { width: 8px; }
+        .chat-window::-webkit-scrollbar-track { background: transparent; }
+        .chat-window::-webkit-scrollbar-thumb { background-color: var(--border-color); border-radius: 10px; border: 3px solid transparent; }
+        .message { max-width: 80%; padding: 0.8rem 1.2rem; border-radius: 20px; line-height: 1.5; animation: messageFadeIn 0.5s ease-in-out; }
+        @keyframes messageFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .user-message { align-self: flex-end; background: var(--user-msg-bg); color: #fff; border-bottom-right-radius: 5px; }
+        .ai-message { align-self: flex-start; background: var(--ai-msg-bg); border: 1px solid var(--border-color); border-bottom-left-radius: 5px; }
+        .ai-message p:not(:last-child) { margin-bottom: 1em; }
+        .ai-message ul, .ai-message ol { padding-left: 1.5rem; }
+        .ai-message code { background-color: rgba(0,0,0,0.3); padding: 0.2em 0.4em; border-radius: 4px; font-family: 'Courier New', Courier, monospace; }
+        .ai-message pre { background-color: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        .typing-indicator { color: var(--font-color-secondary); font-style: italic; }
+        .chat-input-form { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-top: 1px solid var(--border-color); flex-shrink: 0; }
+        .chat-input { flex-grow: 1; background: var(--ai-msg-bg); border: 1px solid var(--border-color); border-radius: 25px; padding: 0.75rem 1.25rem; font-size: 1rem; color: var(--font-color-primary); transition: all 0.3s ease; font-family: var(--font-family); resize: none; line-height: 1.5; max-height: 150px; overflow-y: auto; }
+        .chat-input:focus { outline: none; border-color: var(--accent-glow); box-shadow: 0 0 10px 2px rgba(0, 170, 255, 0.5); }
+        .chat-input::placeholder { color: var(--font-color-secondary); }
+        .send-button { display: flex; justify-content: center; align-items: center; background: var(--user-msg-bg); color: white; border: none; border-radius: 50%; width: 48px; height: 48px; flex-shrink: 0; cursor: pointer; transition: all 0.3s ease; }
+        .send-button:hover, .send-button:focus { transform: scale(1.1); box-shadow: 0 0 15px var(--accent-glow); }
+        .send-button svg { width: 24px; height: 24px; }
         
-        /* Estilização da barra de rolagem para combinar com o tema */
-        .chat-window::-webkit-scrollbar {
-            width: 8px;
-        }
-        .chat-window::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .chat-window::-webkit-scrollbar-thumb {
-            background-color: var(--border-color);
-            border-radius: 10px;
-            border: 3px solid transparent;
-        }
-
-        /* 5. ESTILO DAS MENSAGENS (COM ANIMAÇÃO DE ENTRADA) */
-        .message {
-            max-width: 80%;
-            padding: 0.8rem 1.2rem;
-            border-radius: 20px;
-            line-height: 1.5;
-            animation: messageFadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes messageFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .user-message {
-            align-self: flex-end;
-            background: var(--user-msg-bg);
-            color: #fff;
-            border-bottom-right-radius: 5px;
-        }
-
-        .ai-message {
-            align-self: flex-start;
-            background: var(--ai-msg-bg);
-            border: 1px solid var(--border-color);
-            border-bottom-left-radius: 5px;
-        }
-        
-        /* Estilização do conteúdo gerado pelo 'marked.js' dentro das msgs da IA */
-        .ai-message p:not(:last-child) {
-            margin-bottom: 1em;
-        }
-        .ai-message ul, .ai-message ol {
-            padding-left: 1.5rem;
-        }
-        .ai-message code {
-            background-color: rgba(0,0,0,0.3);
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .ai-message pre {
-             background-color: rgba(0,0,0,0.3);
-             padding: 1rem;
-             border-radius: 8px;
-             overflow-x: auto;
-        }
-        
-        .typing-indicator {
+        /* --- NOVOS ESTILOS PARA O FOOTER --- */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
             color: var(--font-color-secondary);
-            font-style: italic;
+            font-size: 0.875rem;
+            flex-shrink: 0; /* Impede que o footer encolha */
         }
-
-        /* 6. FORMULÁRIO DE INPUT (COM EFEITO DE FOCO) */
-        .chat-input-form {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .chat-input {
-            flex-grow: 1;
-            background: var(--ai-msg-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            padding: 0.75rem 1.25rem;
-            font-size: 1rem;
+        
+        footer a {
             color: var(--font-color-primary);
-            transition: all 0.3s ease;
-            
-            /* === PROPRIEDADES NOVAS/AJUSTADAS === */
-            font-family: var(--font-family); /* Garante que a fonte seja a mesma */
-            resize: none;                   /* Impede que o usuário redimensione manualmente */
-            line-height: 1.5;               /* Melhora o espaçamento entre linhas */
-            max-height: 150px;              /* Limite para o crescimento automático */
-            overflow-y: auto;               /* Adiciona scroll se passar do limite */
-        }
-
-        .chat-input:focus {
-            outline: none;
-            border-color: var(--accent-glow);
-            box-shadow: 0 0 10px 2px rgba(0, 170, 255, 0.5);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
         
-        .chat-input::placeholder {
-            color: var(--font-color-secondary);
+        footer a:hover {
+            color: var(--accent-glow);
+            text-decoration: underline;
         }
-
-        .send-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--user-msg-bg);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+        /* --- FIM DOS ESTILOS DO FOOTER --- */
         
-        .send-button:hover, .send-button:focus {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .send-button svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* 7. DESIGN RESPONSIVO PARA MOBILE */
         @media (max-width: 768px) {
-            body {
-                padding: 0;
-            }
-            .chat-container {
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0;
-                border: none;
-            }
-            .chat-window {
-                padding: 1rem;
-            }
-            .message {
-                max-width: 85%;
-            }
+            .chat-container { margin: 0; max-height: none; border-radius: 0; border: none; }
+            footer { padding: 1rem; }
         }
     </style>
 </head>
@@ -285,26 +143,24 @@
 
     <div class="chat-container">
         <header class="chat-header">
-    <h2 id="ai-name">Carregando Interface...</h2>
-    
-    <button class="new-chat-btn" id="new-chat-button" aria-label="Iniciar nova conversa">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-            <path d="M12 4V8M12 16V20M8 12H4M20 12H16M6.34299 6.34299L9.17199 9.17199M14.828 14.828L17.657 17.657M6.34299 17.657L9.17199 14.828M14.828 9.17199L17.657 6.34299" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
-</header>
+            <h2 id="ai-name">Carregando Interface...</h2>
+            <button class="new-chat-btn" id="new-chat-button" aria-label="Iniciar nova conversa">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor"><path d="M12 4V8M12 16V20M8 12H4M20 12H16M6.34299 6.34299L9.17199 9.17199M14.828 14.828L17.657 17.657M6.34299 17.657L9.17199 14.828M14.828 9.17199L17.657 6.34299" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </header>
         <main id="chat-window" class="chat-window"></main>
         <form id="chat-form" class="chat-input-form">
             <textarea id="message-input" class="chat-input" placeholder="Iniciar interação..." rows="1"></textarea>
             <button type="submit" class="send-button" aria-label="Enviar mensagem">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/></svg>
             </button>
         </form>
     </div>
 
+    <footer>
+        Desenvolvido por <a href="https://wa.me/5531997451906" target="_blank" rel="noopener noreferrer">Marcos Túlio</a>
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
